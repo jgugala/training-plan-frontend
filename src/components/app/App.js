@@ -1,6 +1,7 @@
-import logo from '../../assets/images/logo.svg';
+import logo from 'assets/images/logo.svg';
 import './App.scss';
 
+// TODO: probably will be removed at the latter stage of development
 function App() {
   return (
     <div className="App">
