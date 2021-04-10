@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import getExercises from 'services';
 import './exercises-list.scss';
 
@@ -13,7 +14,7 @@ export default class ExercisesList extends React.Component {
   }
 
   renderExercisesList() {
-    const exercisesList = this.props.exercises.map((exercise) =>
+    const exercisesList = this.props.exercises.map(exercise =>
       <li key={exercise.id}>
         {exercise.name}
       </li>
@@ -43,3 +44,7 @@ export default class ExercisesList extends React.Component {
   }
 
 }
+
+ExercisesList.propTypes = {
+    exercises: PropTypes.array.isRequired
+};
