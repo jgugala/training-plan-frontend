@@ -8,7 +8,7 @@ export default class ExercisesList extends React.Component {
 
   constructor(props) {
     super(props);
-    this.detailsRefs = React.createRef();
+    this.detailsRefs = React.createRef({});
     this.detailsRefs.current = {};
     this.state = {
       isCollapsed: true,
