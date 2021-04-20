@@ -1,3 +1,25 @@
+$li_color: #0099cc;
+
 li {
-	color: green;
+	font-size: 20px;
+	color: $li_color;
+	cursor: pointer;
+	&:hover {
+		color: darken($li_color, 1%);
+		font-weight: bold;
+	}
+	&[aria-pressed="true"] {
+		color: darken($li_color, 1%);
+		font-weight: bold;
+    }
+}
+
+.collapsible-content {
+	color: grey;
+  	font-style: italic;
+  	font-weight: normal;
+  	padding-left: 10px;
+  	max-height: 0;
+  	overflow: hidden;
+  	transition: max-height 0.2s ease-out;
 }

@@ -19,7 +19,6 @@ export default class Dashboard extends React.Component {
         this.setState({
           exercises: response.data
         });
-        console.log(this.state.exercises);
       })
       .catch(error => {
         console.log("Dashboard > getExercises > error =", error);

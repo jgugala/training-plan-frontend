@@ -8,31 +8,57 @@ export default class ExercisesList extends React.Component {
 
   constructor(props) {
     super(props);
+    this.detailsRefs = React.createRef();
+    this.detailsRefs.current = {};
     this.state = {
-      clickCount: 0,
+      isCollapsed: true,
+      selectedId: 0,
     };
+  }
+
+  isCollapsed(id) {
+    return this.state.selectedId == id ? !this.state.isCollapsed : false
+  }
+
+  addToRefs(id, el) {
+    if (el && !(id in this.detailsRefs.current)) {
+      this.detailsRefs.current[id] = el;
+    }
+  }
+
+  handleClick(id) {
+    const detailsRef = this.detailsRefs.current[id];
+    const selectedId = this.state.selectedId;
+
+    if (selectedId != 0 && id != this.state.selectedId) {
+      this.detailsRefs.current[this.state.selectedId].style.maxHeight = null; 
+    }
+    this.detailsRefs.current[id].style.maxHeight = detailsRef.style.maxHeight ? null : detailsRef.scrollHeight + 'px';
+    
+    this.setState({
+      isCollapsed: this.isCollapsed(id),
+      selectedId: id, 
+    });
   }
 
   renderExercisesList() {
     const exercisesList = this.props.exercises.map(exercise =>
-      <li key={exercise.id}>
+
+      <li key={exercise.id} onClick={() => this.handleClick(exercise.id)} 
+        aria-pressed={this.isCollapsed(exercise.id)}>
+
         {exercise.name}
+        
+        <div ref={el => this.addToRefs(exercise.id, el)} className='collapsible-content'>
+          {exercise.description}
+        </div>
+
       </li>
     );
     
     return (
       <ul>{exercisesList}</ul>
     );
-  }
-
-  handleClick(i) {
-    // do something to the button where key===i
-    const clickCount = this.state.clickCount;
-    
-    // Do something
-    this.setState({
-      clickCount: clickCount + 1,
-    });
   }
 
   render() {
