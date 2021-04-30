@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import getExercises from 'services';
 import './exercises-list.scss';
+import ExerciseDetails from './components/exercise-details';
 
 // Class componenet example
 export default class ExercisesList extends React.Component {
@@ -11,12 +12,12 @@ export default class ExercisesList extends React.Component {
     this.detailsRefs = React.createRef({});
     this.detailsRefs.current = {};
     this.state = {
-      isCollapsed: true,
+      isSelected: true,
       selectedId: 0,
     };
   }
 
-  isCollapsed(id) {
+  isSelected(id) {
     return this.state.selectedId == id ? !this.state.isCollapsed : false
   }
 
@@ -36,7 +37,7 @@ export default class ExercisesList extends React.Component {
     this.detailsRefs.current[id].style.maxHeight = detailsRef.style.maxHeight ? null : detailsRef.scrollHeight + 'px';
     
     this.setState({
-      isCollapsed: this.isCollapsed(id),
+      isSelected: this.isSelected(id),
       selectedId: id, 
     });
   }
@@ -44,14 +45,11 @@ export default class ExercisesList extends React.Component {
   renderExercisesList() {
     const exercisesList = this.props.exercises.map(exercise =>
 
-      <li key={exercise.id} onClick={() => this.handleClick(exercise.id)} 
-        aria-pressed={this.isCollapsed(exercise.id)}>
+      <li key={exercise.id} onClick={() => this.handleClick(exercise.id)} aria-pressed={this.isSelected(exercise.id)}>
 
         {exercise.name}
-        
-        <div ref={el => this.addToRefs(exercise.id, el)} className='collapsible-content'>
-          {exercise.description}
-        </div>
+
+        <ExerciseDetails ref={el => this.addToRefs(exercise.id, el)} exercise={exercise}/>
 
       </li>
     );
