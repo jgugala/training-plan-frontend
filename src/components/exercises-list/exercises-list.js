@@ -11,13 +11,13 @@ export default class ExercisesList extends React.Component {
     this.detailsRefs = React.createRef({});
     this.detailsRefs.current = {};
     this.state = {
-      isSelected: true,
+      isSelected: false,
       selectedId: 0,
     };
   }
 
   isSelected(id) {
-    return this.state.selectedId == id ? !this.state.isCollapsed : false
+    return this.state.selectedId == id ? !this.state.isSelected : false
   }
 
   addToRefs(id, el) {
