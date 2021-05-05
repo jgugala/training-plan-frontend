@@ -33,7 +33,8 @@ export default class ExercisesList extends React.Component {
     if (selectedId != 0 && id != this.state.selectedId) {
       this.detailsRefs.current[this.state.selectedId].style.maxHeight = null; 
     }
-    this.detailsRefs.current[id].style.maxHeight = detailsRef.style.maxHeight ? null : detailsRef.scrollHeight + 'px';
+    this.detailsRefs.current[id].style.maxHeight = 
+      detailsRef.style.maxHeight ? null : detailsRef.scrollHeight + 'px';
     
     this.setState({
       isSelected: this.isSelected(id),
@@ -44,11 +45,13 @@ export default class ExercisesList extends React.Component {
   renderExercisesList() {
     const exercisesList = this.props.exercises.map(exercise =>
 
-      <li key={exercise.id} onClick={() => this.handleClick(exercise.id)} aria-pressed={this.isSelected(exercise.id)}>
+      <li key={exercise.id} onClick={() => this.handleClick(exercise.id)} 
+        aria-pressed={this.isSelected(exercise.id)}>
 
         {exercise.name}
 
-        <ExerciseDetails ref={el => this.addToRefs(exercise.id, el)} exercise={exercise}/>
+        <ExerciseDetails 
+          ref={el => this.addToRefs(exercise.id, el)} exercise={exercise}/>
 
       </li>
     );
