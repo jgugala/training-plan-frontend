@@ -1,0 +1,9 @@
+.collapsible-content {
+	color: grey;
+  	font-style: italic;
+  	font-weight: normal;
+  	padding-left: 10px;
+  	max-height: 0;
+  	overflow: hidden;
+  	transition: max-height 0.2s ease-out;
+}

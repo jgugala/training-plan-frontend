@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import getExercises from 'services';
 import './exercises-list.scss';
 import ExerciseDetails from './components/exercise-details';
 
