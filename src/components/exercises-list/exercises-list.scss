@@ -1,0 +1,15 @@
+$li_color: #0099cc;
+
+li {
+	font-size: 20px;
+	color: $li_color;
+	cursor: pointer;
+	&:hover {
+		color: darken($li_color, 1%);
+		font-weight: bold;
+	}
+	&[aria-pressed="true"] {
+		color: darken($li_color, 1%);
+		font-weight: bold;
+    }
+}

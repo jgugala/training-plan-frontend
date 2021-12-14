@@ -7,10 +7,13 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './components/app';
 import reportWebVitals from './reportWebVitals';
+import Dashboard from './pages/dashboard';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/*<App />*/}
+    <Dashboard />
   </React.StrictMode>,
   document.getElementById('root')
 );
