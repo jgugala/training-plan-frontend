@@ -5,15 +5,12 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import App from './components/app';
+import { AppWrapper } from './components/app';
 import reportWebVitals from './reportWebVitals';
-import Dashboard from './pages/dashboard';
-
 
 ReactDOM.render(
   <React.StrictMode>
-    {/*<App />*/}
-    <Dashboard />
+    <AppWrapper />
   </React.StrictMode>,
   document.getElementById('root')
 );

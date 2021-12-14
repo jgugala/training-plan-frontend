@@ -1,26 +1,52 @@
+import React, { Fragment, useEffect } from 'react';
 import logo from 'assets/images/logo.svg';
 import './App.scss';
+import { HashRouter as Router, Route, Routes, Redirect } from 'react-router-dom'
+import Header from '../layout/header';
+import Dashboard from '../../pages/dashboard';
+import Register from '../accounts/register';
+import Login from '../accounts/login';
+import PrivateRoute from '../common/private-route';
+import NotFound from '../common/not-found';
+import AuthProvider from '../../context/';
+import { useAuthState } from '../../context';
+import { getUser } from '../../services/auth-services';
 
-// TODO: probably will be removed at the latter stage of development
 function App() {
+  const { authState, dispatch } = useAuthState();
+  debugger;
+  
+  useEffect(() => {
+    debugger;
+    getUser(authState, dispatch);
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header />
+        <div className="container">
+          <Routes>
+            <Route path="/" element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            } />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/*" element={<NotFound />} />
+          </Routes>
+        </div>
+    </Router>
   );
 }
 
 export default App;
+
+export const AppWrapper = props => {
+  return (
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  );
+}
+

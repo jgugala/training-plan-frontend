@@ -13,6 +13,7 @@ export default class Dashboard extends React.Component {
   }
 
   componentDidMount() {
+    debugger;
     getExercises()
       .then(response => {
         console.log("Dashboard > getExercises > response =", response);

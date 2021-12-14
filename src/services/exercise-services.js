@@ -1,7 +1,7 @@
 import axios from 'axios';
-import client from './http-client-config';
+import { client } from './http-client-config';
 
-const GET_EXERCISES = '/exercises/';
+const GET_EXERCISES = 'exercises/';
 
 export default function getExercises() {
 	console.log("exerciseServices > getExercises called...");

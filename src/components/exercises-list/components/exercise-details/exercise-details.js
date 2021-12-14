@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './exercise-details.scss';
 
-const ExerciseDetails = React.forwardRef((props, ref) => (
+const ExerciseDetails = React.forwardRef((props, ref) =>
 	<div ref={ref} className="collapsible-content">
 		{props.exercise.description}
   	</div>
-));
+);
 
 export default ExerciseDetails
 
