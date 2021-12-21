@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import logo from 'assets/images/logo.svg';
 import './App.scss';
 import { HashRouter as Router, Route, Routes, Redirect } from 'react-router-dom'
@@ -8,22 +8,31 @@ import Register from '../accounts/register';
 import Login from '../accounts/login';
 import PrivateRoute from '../common/private-route';
 import NotFound from '../common/not-found';
-import AuthProvider from '../../context/';
+import { AuthProvider, MessageProvider } from '../../context/';
 import { useAuthState } from '../../context';
 import { getUser } from '../../services/auth-services';
+import { Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from 'react-alert-template-basic';
+import Alerts from '../common/alerts';
+
+// Alert options
+const alertOptions = {
+  timeout: 3000,
+  position: 'top center'
+};
 
 function App() {
   const { authState, dispatch } = useAuthState();
-  debugger;
   
   useEffect(() => {
-    debugger;
     getUser(authState, dispatch);
   }, [])
 
   return (
-    <Router>
-      <Header />
+    <AlertProvider template={AlertTemplate} {...alertOptions}>
+      <Router>
+        <Header />
+        <Alerts />
         <div className="container">
           <Routes>
             <Route path="/" element={
@@ -36,7 +45,8 @@ function App() {
             <Route path="/*" element={<NotFound />} />
           </Routes>
         </div>
-    </Router>
+      </Router>
+    </AlertProvider>
   );
 }
 
@@ -45,7 +55,9 @@ export default App;
 export const AppWrapper = props => {
   return (
     <AuthProvider>
-      <App />
+      <MessageProvider>
+        <App />
+      </MessageProvider>
     </AuthProvider>
   );
 }

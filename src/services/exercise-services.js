@@ -1,10 +1,12 @@
 import axios from 'axios';
-import { client } from './http-client-config';
+import { client, provideAuthHeader } from './http-client-config';
 
 const GET_EXERCISES = 'exercises/';
 
-export default function getExercises() {
-	console.log("exerciseServices > getExercises called...");
+export default function getExercises(authState) {
+  console.log("exerciseServices > getExercises called...");
 
-	return client.get(GET_EXERCISES);
+  const config = provideAuthHeader(authState);
+
+  return client.get(GET_EXERCISES, config);
 }

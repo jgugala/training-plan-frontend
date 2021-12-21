@@ -4,9 +4,10 @@ import { useAuthState } from '../../context';
 import { login } from '../../services/auth-services';
 import { Navigate } from 'react-router-dom';
 
+
 const Login = props => {
   const { authState, dispatch } = useAuthState();
-  debugger;
+  
   const initialState = {
   	username: '',
   	password: ''
@@ -28,8 +29,6 @@ const Login = props => {
   	});
   };
 
-
-  debugger;
 	return (
     authState.isAuthenticated ? <Navigate to="/" /> :
 	  <div className="col-md-6 m-auto">

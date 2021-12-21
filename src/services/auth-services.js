@@ -8,7 +8,9 @@ import {
   REGISTER_FAILURE,
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
-  GET_USER_LOADING
+  GET_USER_LOADING,
+  GET_ERRORS,
+  handleErrors
 } from '../context/reducers';
 
 const LOGIN = "login/";
@@ -25,7 +27,7 @@ export const login = (username, password, dispatch) => {
 
   client
     .post(LOGIN, body)
-    .then(res =>{
+    .then(res => {
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
@@ -35,6 +37,7 @@ export const login = (username, password, dispatch) => {
       dispatch({
         type: LOGIN_FAILURE
       });
+      handleErrors(err, dispatch);
     });
 }
 
@@ -75,6 +78,7 @@ export const register = ({username, password, email}, dispatch) => {
       dispatch({
         type: REGISTER_FAILURE
       });
+      handleErrors(err, dispatch);
     });
 }
 
@@ -90,16 +94,10 @@ export const getUser = (authState, dispatch) => {
   client
     .get(GET_USER, config)
     .then(res =>{
-      setTimeout(() => {
-        dispatch({
-          type: GET_USER_SUCCESS,
-          payload: res.data
-        });
-      }, 0);
-      // dispatch({
-      //   type: GET_USER_SUCCESS,
-      //   payload: res.data
-      // });
+      dispatch({
+        type: GET_USER_SUCCESS,
+        payload: res.data
+      });
     })
     .catch(err => {
       dispatch({

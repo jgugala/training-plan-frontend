@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuthState } from '../../context';
+import { useAuthState, useMessage } from '../../context';
 import { register } from '../../services/auth-services';
 import { Navigate } from 'react-router-dom';
+import { createMessage } from '../../context/reducers';
 
 const Register = props => {
   const { authState, dispatch } = useAuthState();
+
+  const { messageDispatch } = useMessage();
   
   const initialState = {
     username: '',
@@ -21,7 +24,9 @@ const Register = props => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (password !== password2) {
-      console.log('passwords don\'t match');
+      messageDispatch(
+        createMessage({ passwordNotMatch: "Passwords do not match" })
+      );
     } else {
       const newUser = {
         username,
