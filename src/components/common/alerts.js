@@ -12,12 +12,12 @@ const Alerts = props => {
   const { alert } = props;
 
   // https://stackoverflow.com/a/53446665
+  // https://bit.ly/32Joish
   const usePrevious = value => {
     const ref = useRef();
     useEffect(() => {
       ref.current = value;
     });
-    console.log('previous', ref.current);
     return ref.current;
   }
 

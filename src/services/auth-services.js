@@ -28,12 +28,14 @@ export const login = (username, password, dispatch) => {
   client
     .post(LOGIN, body)
     .then(res => {
+      console.log("authServices > login > response =", res);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
       });
     })
     .catch(err => {
+      console.log("authServices > login > error =", err);
       dispatch({
         type: LOGIN_FAILURE
       });
@@ -51,11 +53,13 @@ export const logout = (authState, dispatch) => {
   client
     .post(LOGOUT, null, config)
     .then(res =>{
+      console.log("authServices > logout > response =", res);
       dispatch({
         type: LOGOUT_SUCCESS
       });
     })
     .catch(err => {
+      console.log("authServices > logout > error =", err);
     });
 }
 
@@ -69,12 +73,14 @@ export const register = ({username, password, email}, dispatch) => {
   client
     .post(REGISTER, body)
     .then(res =>{
+      console.log("authServices > register > response =", res);
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data
       });
     })
     .catch(err => {
+      console.log("authServices > register > error =", err);
       dispatch({
         type: REGISTER_FAILURE
       });
@@ -94,12 +100,14 @@ export const getUser = (authState, dispatch) => {
   client
     .get(GET_USER, config)
     .then(res =>{
+      console.log("authServices > getUser > response =", res);
       dispatch({
         type: GET_USER_SUCCESS,
         payload: res.data
       });
     })
     .catch(err => {
+      console.log("authServices > getUser > error =", err);
       dispatch({
         type: GET_USER_FAILURE
       });

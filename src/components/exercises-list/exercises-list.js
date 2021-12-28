@@ -42,29 +42,35 @@ export default class ExercisesList extends React.Component {
     });
   }
 
-  renderExercisesList() {
-    const exercisesList = this.props.exercises.map(exercise =>
+  renderTrainingsList() {
+    const trainingsList = this.props.response.trainings ? 
+      this.props.response.trainings.map(training => {
 
-      <li key={exercise.id} onClick={() => this.handleClick(exercise.id)} 
-        aria-pressed={this.isSelected(exercise.id)}>
+        const trainingExercises = training.training_items.map(trainingItem =>
+          this.props.response.exercises.find(exercise => 
+            exercise.id === trainingItem.exercise_id
+          )
+        )
 
-        {exercise.name}
+        return <li key={training.id} onClick={() => this.handleClick(training.id)} 
+          aria-pressed={this.isSelected(training.id)}>
 
-        <ExerciseDetails 
-          ref={el => this.addToRefs(exercise.id, el)} exercise={exercise}/>
+          {training.name}
 
-      </li>
-    );
+          <ExerciseDetails ref={el => this.addToRefs(training.id, el)} 
+            exercises={trainingExercises}/>
+        </li>
+      }) : [];
     
     return (
-      <ul>{exercisesList}</ul>
+      <ul>{trainingsList}</ul>
     );
   }
 
   render() {
     return (
       <div>
-        {this.renderExercisesList()}
+        {this.renderTrainingsList()}
       </div>
     );
   }
@@ -72,5 +78,5 @@ export default class ExercisesList extends React.Component {
 }
 
 ExercisesList.propTypes = {
-    exercises: PropTypes.array.isRequired
+    response: PropTypes.object.isRequired
 };

@@ -104,8 +104,7 @@ export const ErrorReducer = (state = initialErrorState, action) => {
 }
 
 // Message actions
-export const GET_MESSAGE = "GET_MESSAGE";
-export const CREATE_MESSAGE = "CREATE_MESSAGE";
+const CREATE_MESSAGE = "CREATE_MESSAGE";
 
 export const createMessage = msg => {
   return {
@@ -120,10 +119,8 @@ export const initialMessageState = {}
 // Message Reducer
 export const MessageReducer = (state = initialMessageState, action) => {
   switch (action.type) {
-    case GET_MESSAGE:
-      return action.payload
     case CREATE_MESSAGE:
-      return (state = action.payload);
+      return action.payload;
     default:
       return state;
   }

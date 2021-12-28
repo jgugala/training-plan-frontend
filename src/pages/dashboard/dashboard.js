@@ -2,27 +2,33 @@ import React, { useEffect } from 'react';
 import getExercises from 'services';
 import ExercisesList from 'components/exercises-list';
 import { useAuthState } from '../../context';
+import { client, provideAuthHeader } from '../../services/http-client-config';
 
-// Class componenet example (lifecycle methods)
 const Dashboard = props => {
   const { authState, dispatch } = useAuthState();
 
-  const [exercises, setExercises] = React.useState([]);
+  const [response, setResponse] = React.useState({});
 
   useEffect(() => {
+    let isMounted = true;
     getExercises(authState)
-      .then(response => {
-        console.log("Dashboard > getExercises > response =", response);
-        setExercises(response.data);
+      .then(res => {
+        console.log("Dashboard > getTrainingsAndExercises > response =", res);
+        if (isMounted) {
+          setResponse(res);
+        }
       })
-      .catch(error => {
-        console.log("Dashboard > getExercises > error =", error);
-      }
-    );
+      .catch(err => {
+        console.log("Dashboard > getTrainingsAndExercises > error =", err);
+      });
+
+      return () => { 
+        isMounted = false 
+      };
   }, [])
 
   return (
-    <ExercisesList exercises={exercises}/>
+    <ExercisesList response={response}/>
   );
 }
 
