@@ -3,8 +3,8 @@ import { client, provideAuthHeader } from './http-client-config';
 
 const GET_EXERCISES = 'trainings/';
 
-export default function getExercises(authState) {
-  console.log("exerciseServices > getExercises called...");
+export default function getTrainingsAndExercises(authState) {
+  console.log("exerciseServices > getTrainingsAndExercises called...");
 
   const config = provideAuthHeader(authState);
 

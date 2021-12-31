@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import getExercises from 'services';
-import ExercisesList from 'components/exercises-list';
+import getTrainingsAndExercises from 'services';
+import TrainingsList from 'components/trainings-list';
 import { useAuthState } from '../../context';
 import { client, provideAuthHeader } from '../../services/http-client-config';
 
@@ -11,7 +11,7 @@ const Dashboard = props => {
 
   useEffect(() => {
     let isMounted = true;
-    getExercises(authState)
+    getTrainingsAndExercises(authState)
       .then(res => {
         console.log("Dashboard > getTrainingsAndExercises > response =", res);
         if (isMounted) {
@@ -28,7 +28,7 @@ const Dashboard = props => {
   }, [])
 
   return (
-    <ExercisesList response={response}/>
+    <TrainingsList response={response}/>
   );
 }
 

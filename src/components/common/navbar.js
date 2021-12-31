@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuthState } from '../../context';
 import { logout } from '../../services/auth-services';
 
-// TODO: move it to the 'common' dir and rename to Navbar
-const Header = props => {
+const Navbar = props => {
   const {authState, dispatch} = useAuthState();
 
   const { isAuthenticated, user } = authState;
@@ -64,4 +63,4 @@ const Header = props => {
       </nav>
 	);
 }
-export default Header;
+export default Navbar;

@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './exercise-details.scss';
+import './training-details.scss';
 
-const ExerciseDetails = React.forwardRef((props, ref) =>
+const TrainingDetails = React.forwardRef((props, ref) =>
   <div ref={ref} className="collapsible-content">
     {props.exercises.map(exercise => 
-	  `${exercise.name}\n`
-	)}
+      `${exercise.name}\n`
+    )}
   </div>
 );
 
-export default ExerciseDetails
+export default TrainingDetails
 
-ExerciseDetails.propTypes = {
+TrainingDetails.propTypes = {
     exercises: PropTypes.array.isRequired
 };

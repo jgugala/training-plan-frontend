@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './exercises-list.scss';
-import ExerciseDetails from './components/exercise-details';
+import './trainings-list.scss';
+import TrainingDetails from './components/training-details';
 
 // Class componenet example
-export default class ExercisesList extends React.Component {
+export default class TrainingsList extends React.Component {
 
   constructor(props) {
     super(props);
@@ -57,7 +57,7 @@ export default class ExercisesList extends React.Component {
 
           {training.name}
 
-          <ExerciseDetails ref={el => this.addToRefs(training.id, el)} 
+          <TrainingDetails ref={el => this.addToRefs(training.id, el)} 
             exercises={trainingExercises}/>
         </li>
       }) : [];
@@ -77,6 +77,6 @@ export default class ExercisesList extends React.Component {
 
 }
 
-ExercisesList.propTypes = {
+TrainingsList.propTypes = {
     response: PropTypes.object.isRequired
 };

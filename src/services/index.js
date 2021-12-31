@@ -1,1 +1,1 @@
-export { default } from './exercise-services';
+export { default } from './training-services';

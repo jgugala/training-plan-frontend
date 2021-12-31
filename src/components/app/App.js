@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import logo from 'assets/images/logo.svg';
 import './App.scss';
 import { HashRouter as Router, Route, Routes, Redirect } from 'react-router-dom'
-import Header from '../layout/header';
+import Navbar from '../common/navbar';
 import Dashboard from '../../pages/dashboard';
 import Register from '../accounts/register';
 import Login from '../accounts/login';
@@ -31,7 +31,7 @@ function App() {
   return (
     <AlertProvider template={AlertTemplate} {...alertOptions}>
       <Router>
-        <Header />
+        <Navbar />
         <Alerts />
         <div className="container">
           <Routes>
